@@ -14,4 +14,61 @@ $(document).ready(function () {
 		let type = $(event.currentTarget).data('publication');
 		publish(container, type);
 	});
-});
+}); 
+
+
+function agregandoEventos(){
+    
+    var btn_modalChat = document.getElementById("btn_modalChat")
+    var btn_nodalImagen = document.getElementById("btn_modalImagen")
+    
+
+    btn_modalChat.addEventListener("click", agregarMensaje);
+    btn_nodalImagen.addEventListener('change', agregarImagen, false);
+}
+
+agregandoEventos();
+
+function    agregarImagen(){
+    var blog = document.getElementById("bitacoraContenido")
+    var modalImages = document.getElementById("modalImages")
+     
+     blog.appendChild(contenedorBlog);
+    modalImages.style.display ="none"
+  }
+
+
+
+function agregarMensaje(){
+    var blog = document.getElementById("bitacoraContenido")
+    var titulo = document.getElementById("tituloChat").value;
+    var mensaje = document.getElementById("textarea1").value;
+    var modalChat = document.getElementById("modalChat")
+    
+    var contenedorBlog = crearUnElemento("section",
+        {className: "container card",innerText:""})
+    var cardBlog = crearUnElemento("div",
+        {className: "card-panel ",innerText:""})
+    var tituloBlog = crearUnElemento("h4",
+        {className: "col s12 text-blue",innerText: titulo})
+    var mensajeBlog = crearUnElemento("div",
+        {className: "col s12 ",innerText: mensaje})
+    
+    cardBlog.appendChild(tituloBlog)
+    cardBlog.appendChild(mensajeBlog)
+    contenedorBlog.appendChild(cardBlog)
+    blog.appendChild(contenedorBlog)
+    
+    
+    modalChat.style.display ="none"
+}
+	
+
+function crearUnElemento(elementoACrear,propiedades) {
+  var elementoCreado = document.createElement(elementoACrear);
+  elementoCreado.className= propiedades.className;
+  elementoCreado.innerText = propiedades.innerText;
+
+  return elementoCreado;
+}
+
