@@ -24,17 +24,38 @@ function agregandoEventos(){
     
 
     btn_modalChat.addEventListener("click", agregarMensaje);
-    btn_nodalImagen.addEventListener('change', agregarImagen, false);
+    btn_nodalImagen.addEventListener('click', agregarImagen);
 }
 
 agregandoEventos();
 
-function    agregarImagen(){
+function agregarImagen(){
     var blog = document.getElementById("bitacoraContenido")
     var modalImages = document.getElementById("modalImages")
      
-     blog.appendChild(contenedorBlog);
-    modalImages.style.display ="none"
+     var imgBlog = crearUnElemento("img",
+        {className: "",innerText: ""})
+     
+    blog.appendChild(imgBlog);
+    
+      var file= document.getElementById("image-file");
+      file.addEventListener("change", manejarSubida);
+      function manejarSubida() {
+        var reader =  new FileReader();
+        reader.readAsDataURL(this.files[0])
+        reader.onload = function (){
+            
+        var imgBlog = this.result;
+            console.log(imgBlog)
+          imgBlog.style.display="block";
+          imgBlog.setAttribute("src", imgBlog);
+        }
+      }
+    
+    
+    modalImages.style.display ="none";
+    
+    
   }
 
 
@@ -68,6 +89,7 @@ function crearUnElemento(elementoACrear,propiedades) {
   var elementoCreado = document.createElement(elementoACrear);
   elementoCreado.className= propiedades.className;
   elementoCreado.innerText = propiedades.innerText;
+  
 
   return elementoCreado;
 }
